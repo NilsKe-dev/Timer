@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Timer & Gallery</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CryptoJS for client-side decryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Password Lock Screen (English) -->
+    <div class="lock-screen" id="lock-screen">
+        <div class="lock-card">
+            <h2>Private Website</h2>
+            <p>This website is password protected. Please enter the password to unlock the content.</p>
+            <div class="password-input-group">
+                <input type="password" id="password-input" placeholder="Enter password..." autofocus>
+                <button id="login-btn">Unlock</button>
+            </div>
+            <div class="error-message" id="error-message">Incorrect password!</div>
+        </div>
+    </div>
+
+    <!-- Main Content (revealed after password) -->
+    <div class="main-content" id="main-content">
+        
+        <!-- Top Row: Flanked Timer -->
+        <div class="timer-section-row">
+            <!-- Left Picture Frame (Bild1) -->
+            <div id="left-frame-container" class="flank-container">
+                <!-- Injected via JavaScript -->
+            </div>
+            
+            <!-- Dashboard Container (Timer + Heart) -->
+            <div class="dashboard">
+                <!-- Heart Progress Bar -->
+                <div class="heart-container heart-pulse">
+                    <svg viewBox="-5 -5 110 110" class="heart-svg">
+                        <defs>
+                            <!-- Heart Clip Path -->
+                            <clipPath id="heart-clip">
+                                <path d="M 50,15 C 35,0 0,0 0,37.5 C 0,70 50,100 50,100 C 50,100 100,70 100,37.5 C 100,0 65,0 50,15 Z" />
+                            </clipPath>
+                        </defs>
+                        
+                        <!-- Empty Heart (Background) -->
+                        <path class="heart-bg" d="M 50,15 C 35,0 0,0 0,37.5 C 0,70 50,100 50,100 C 50,100 100,70 100,37.5 C 100,0 65,0 50,15 Z" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
+                        
+                        <!-- Clipped Wave Fill -->
+                        <g clip-path="url(#heart-clip)">
+                            <!-- Shifted vertically via JS (translateY: 100 to 0) -->
+                            <g id="wave-group" transform="translate(0, 100)">
+                                <!-- Back Wave (Rose Red / Slower) -->
+                                <path class="wave wave-back" d="M 0 0 Q 25 -6, 50 0 T 100 0 Q 125 -6, 150 0 T 200 0 L 200 120 L 0 120 Z" />
+                                <!-- Front Wave (Vibrant Red / Faster) -->
+                                <path class="wave" d="M 0 0 Q 25 -3, 50 0 T 100 0 Q 125 -3, 150 0 T 200 0 L 200 120 L 0 120 Z" />
+                            </g>
+                        </g>
+                        
+                        <!-- Red Heart Outline (Now padded and sits nicely on top) -->
+                        <path class="heart-outline" d="M 50,15 C 35,0 0,0 0,37.5 C 0,70 50,100 50,100 C 50,100 100,70 100,37.5 C 100,0 65,0 50,15 Z" />
+                    </svg>
+                    <!-- Percentage indicator -->
+                    <div class="percentage-text" id="percent-text">0%</div>
+                </div>
+
+                <!-- Timer Segment -->
+                <h2 class="timer-title">See you in</h2>
+                
+                <div class="timer-grid">
+                    <div class="timer-segment">
+                        <div class="timer-value" id="days-val">00</div>
+                        <div class="timer-label">Days</div>
+                    </div>
+                    <div class="timer-segment">
+                        <div class="timer-value" id="hours-val">00</div>
+                        <div class="timer-label">Hours</div>
+                    </div>
+                    <div class="timer-segment">
+                        <div class="timer-value" id="minutes-val">00</div>
+                        <div class="timer-label">Minutes</div>
+                    </div>
+                    <div class="timer-segment">
+                        <div class="timer-value" id="seconds-val">00</div>
+                        <div class="timer-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Picture Frame (Bild2) -->
+            <div id="right-frame-container" class="flank-container">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Bottom Gallery Wall (Bild3, Bild4, Bild5) -->
+        <div class="gallery-wall" id="gallery-wall">
+            <!-- Injected via JavaScript -->
+        </div>
+
+    </div>
+
+    <!-- Lightbox backdrop container -->
+    <div id="lightbox-backdrop" class="lightbox-backdrop"></div>
+
+    <!-- Encrypted Data payload -->
+    <script src="data.js"></script>
+    
+    <!-- App Script -->
+    <script src="app.js" defer></script>
+</body>
+</html>
